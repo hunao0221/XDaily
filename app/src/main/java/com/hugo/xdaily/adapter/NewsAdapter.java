@@ -50,8 +50,8 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     stories.add(stroy);
                 }
             });
-            notifyDataSetChanged();
         }
+        notifyDataSetChanged();
     }
 
     private static onItemClickListenenr listenenr;
