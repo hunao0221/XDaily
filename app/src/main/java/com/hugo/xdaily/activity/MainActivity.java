@@ -61,10 +61,15 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
-        initNews(false);
+        initStories(false);
     }
 
-    private void initNews(final boolean isRefresh) {
+    /**
+     *
+     * 获区日报列表
+     * @param isRefresh 刷新
+     */
+    private void initStories(final boolean isRefresh) {
         stories = new ArrayList<>();
         Network.getZhihuApi().getLatest()
                 .subscribeOn(Schedulers.io())
@@ -141,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                initNews(true);
+                initStories(true);
             }
         });
     }

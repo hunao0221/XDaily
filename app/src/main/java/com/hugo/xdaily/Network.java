@@ -8,15 +8,12 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * @auther Hugo
+ * @author  Hugo
  * Created on 2016/6/2 10:57.
  */
 public class Network {
-
     private static Retrofit retrofit;
     private static ZhihuApi zhihuApi;
-
-
 
     public static ZhihuApi getZhihuApi() {
         if (zhihuApi == null) {
@@ -30,6 +27,4 @@ public class Network {
         }
         return zhihuApi;
     }
-
-
 }

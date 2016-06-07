@@ -2,12 +2,15 @@ package com.hugo.xdaily.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hugo.xdaily.Network;
@@ -47,6 +50,9 @@ public class ContentActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
         webView.getSettings().setJavaScriptEnabled(true);
         id = getIntent().getStringExtra("id");
         initData();
@@ -63,14 +69,17 @@ public class ContentActivity extends AppCompatActivity {
                         title = content.getTitle();
                         setTitleImg(content.getImage());
                         return structHtml(content.getBody(), content.getCss(), content.getJs());
-                        //return content.getShare_url();
                     }
                 })
                 .subscribe(new Action1<String>() {
                     @Override
                     public void call(String s) {
-                        webView.loadDataWithBaseURL(s, s, "text/html", "utf-8", null);
-                        // webView.loadUrl(s);
+                        webView.loadDataWithBaseURL(null, s, "text/html", "utf-8", null);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        Toast.makeText(mContent, "出错了", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -85,7 +94,6 @@ public class ContentActivity extends AppCompatActivity {
 
     public String structHtml(String htmlBody, List<String> cssList, List<String> jsList) {
         String deleteDiv = "<div class=\"img-place-holder\"></div>";
-
         htmlBody = htmlBody.replace(deleteDiv, "");
         StringBuilder htmlString = new StringBuilder("<html><head>");
         for (String css : cssList) {
@@ -101,7 +109,6 @@ public class ContentActivity extends AppCompatActivity {
     }
 
     public String setCssLink(String css) {
-        System.out.println(css);
         return "<link rel=\"stylesheet\" href=\"" + css + "\">";
     }
 

@@ -18,14 +18,16 @@
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|snap"
+            app:statusBarScrim="@android:color/transparent"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
             app:titleEnabled="false">
 
             <ImageView
                 android:id="@+id/iv_title_img"
                 android:layout_width="match_parent"
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="parallax"
                 android:layout_height="match_parent" />
 
             <android.support.v7.widget.Toolbar

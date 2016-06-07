@@ -9,19 +9,19 @@ import retrofit2.http.Path;
 import rx.Observable;
 
 /**
- * @auther Hugo
+ * @author  Hugo
  * Created on 2016/6/2 9:57.
  */
 public interface ZhihuApi {
-    //http://news-at.zhihu.com/api/4/news/latest
+    //最新消息
     @GET("api/4/news/latest")
     Observable<LatestStory> getLatest();
 
-    //http://news-at.zhihu.com/api/4/news/8391488
+    //日报内容
     @GET("api/4/news/{id}")
     Observable<Content> getContent(@Path("id") String id);
 
-    //http://news.at.zhihu.com/api/4/news/before/20131119
+    //过往消息，date是一个日期，如:20160606
     @GET("api/4/news/before/{date}")
     Observable<BeforeStroy> getBefore(@Path("date") String date);
 }
