@@ -8,9 +8,15 @@
     tools:context="com.hugo.xdaily.activity.ContentActivity"
     tools:showIn="@layout/activity_content">
 
-    <WebView
-        android:id="@+id/webview"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></WebView>
+        android:layout_height="match_parent">
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></WebView>
+    </RelativeLayout>
+
 
 </android.support.v4.widget.NestedScrollView>

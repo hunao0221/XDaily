@@ -2,19 +2,20 @@ package com.hugo.xdaily.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.flyco.systembar.SystemBarHelper;
+import com.hugo.xdaily.IDEvent;
 import com.hugo.xdaily.Network;
 import com.hugo.xdaily.R;
+import com.hugo.xdaily.Rxbus;
 import com.hugo.xdaily.entry.Content;
 
 import java.util.List;
@@ -50,11 +51,18 @@ public class ContentActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
+        SystemBarHelper.immersiveStatusBar(this);
+        SystemBarHelper.setHeightAndPadding(this, toolbar);
         webView.getSettings().setJavaScriptEnabled(true);
-        id = getIntent().getStringExtra("id");
+
+        Rxbus.getInstance().tObservableSticky(IDEvent.class)
+                .subscribe(new Action1<IDEvent>() {
+                    @Override
+                    public void call(IDEvent idEvent) {
+                        id = idEvent.getId();
+                    }
+                });
+
         initData();
     }
 
@@ -129,4 +137,5 @@ public class ContentActivity extends AppCompatActivity {
         intent.setType("text/plain");
         startActivity(Intent.createChooser(intent, "通过以下应用分享"));
     }
+
 }

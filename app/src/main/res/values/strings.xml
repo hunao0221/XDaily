@@ -2,5 +2,10 @@
     <string name="app_name">X日报</string>
     <string name="action_claer_cache">清除缓存</string>
     <string name="title_activity_content">ContentActivity</string>
+    <string name="about">X日报是我学习Retrofit和RxJava后的实践小项目，没有进一步优化，但是不会伤害到你的手机，放心吧！\n项目源代码已托管到Github,感兴趣的小伙伴请戳:\n<a href="https://github.com/hunao0221/XDaily">https://github.com/hunao0221/XDaily</a></string>
+    <string name="action_about_me">关于</string>
+    <string name="error_info">加载失败,请稍后再试</string>
+    <string name="data_no_more">没有更多了</string>
+    <string name="error">出错了</string>
 
 </resources>
